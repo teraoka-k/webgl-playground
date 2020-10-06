@@ -1,0 +1,47 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "build",
+      "type": "shell",
+      "group": "none",
+      "command": "docker build -t webgl .",
+      "problemMatcher": []
+    },
+    {
+      "label": "run",
+      "type": "shell",
+      "group": "none",
+      "command": "docker run --rm -it --name webgl -p 3000:3000 -v ${PWD}:/app webgl npm run dev",
+      "problemMatcher": []
+    },
+    {
+      "label": "run docker image",
+      "type": "shell",
+      "group": "none",
+      "command": "docker run --rm -it --name webgl -e PORT=3000 -p 3000:3000 webgl",
+      "problemMatcher": []
+    },
+    {
+      "label": "init node_modules",
+      "type": "shell",
+      "group": "none",
+      "command": "docker run --rm -it --name webgl -p 3000:3000 -v ${PWD}:/app webgl npm i",
+      "problemMatcher": []
+    },
+    {
+      "label": "login",
+      "type": "shell",
+      "group": "none",
+      "command": "docker exec -it webgl ash",
+      "problemMatcher": []
+    },
+    {
+      "label": "clear untagged images",
+      "type": "shell",
+      "group": "none",
+      "command": "docker rmi $(docker images -q --filter 'dangling=true')",
+      "problemMatcher": []
+    }
+  ]
+}
