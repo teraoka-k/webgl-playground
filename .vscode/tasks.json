@@ -12,7 +12,7 @@
       "label": "run",
       "type": "shell",
       "group": "none",
-      "command": "docker run --rm -it --name webgl -p 3000:3000 -v ${PWD}:/app webgl npm run dev",
+      "command": "docker run --rm -it --name webgl -p 3000:3000 -v ${PWD}:/app -w /app node:alpine npm run dev",
       "problemMatcher": []
     },
     {

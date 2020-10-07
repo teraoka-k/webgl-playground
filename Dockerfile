@@ -5,7 +5,7 @@ WORKDIR /app
 ADD . .
 
 RUN npm i
-RUN npm run build
+RUN npx next build
 RUN echo 1
 
 # Run the image as a non-root user
