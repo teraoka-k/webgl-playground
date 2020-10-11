@@ -45,17 +45,12 @@ const createProgram = (
 
   // Create the shader program
   const program = gl.createProgram();
-  [vertexShader, fragmentShader].forEach((shader) =>
-    gl.attachShader(program, shader)
-  );
+  [vertexShader, fragmentShader].forEach((shader) => gl.attachShader(program, shader));
   gl.linkProgram(program);
 
   // If creating the shader program failed, alert
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-    alert(
-      "Unable to initialize the shader program: " +
-        gl.getProgramInfoLog(program)
-    );
+    alert( "Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
     return null;
   }
 
@@ -81,9 +76,7 @@ const loadShader = (
 
   // See if it compiled successfully
   if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-    alert(
-      "An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader)
-    );
+    alert( "An error occurred compiling the shaders: " + gl.getShaderInfoLog(shader));
     gl.deleteShader(shader);
     return null;
   }

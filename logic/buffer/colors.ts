@@ -1,20 +1,8 @@
 export const squareColors = [
-  1.0,
-  1.0,
-  1.0,
-  1.0, // white
-  1.0,
-  0.0,
-  0.0,
-  1.0, // red
-  0.0,
-  1.0,
-  0.0,
-  1.0, // green
-  0.0,
-  0.0,
-  1.0,
-  1.0, // blue
+  1.0, 1.0, 1.0, 1.0, // white
+  1.0, 0.0, 0.0, 1.0, // red
+  0.0, 1.0, 0.0, 1.0, // green
+  0.0, 0.0, 1.0, 1.0, // blue
 ];
 
 /**
@@ -32,7 +20,6 @@ const _cubeColors = [
 /**
  * Convert the array of colors into a table for all the vertices.
  */
-export const cubeColors = _cubeColors
-  // Repeat each color four times for the four vertices of the face
-  .map((color) => color.concat(color, color, color))
+export const cubeColors: number[] = _cubeColors
+  .map((color) => color.concat(color.map(a=>a/8), color.map(a=>a/16), color.map(a=>a/8)))
   .reduce((color1, color2) => color1.concat(color2));
