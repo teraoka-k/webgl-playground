@@ -1,41 +1,8 @@
-import vsSource from "../glsl/vsSource.glsl";
-import fsSource from "../glsl/fsSource.glsl";
-
-/**
- * Vertex shader program
- */
-export const createShader = (gl: WebGLRenderingContext): Program => {
-  const program = createProgram(gl, vsSource, fsSource);
-  return {
-    shader: program,
-    attribLocations: {
-      vertexPosition: gl.getAttribLocation(program, "aVertexPosition"),
-      vertexColor: gl.getAttribLocation(program, "aVertexColor"),
-    },
-    uniformLocations: {
-      projectionMatrix: gl.getUniformLocation(program, "uProjectionMatrix"),
-      modelViewMatrix: gl.getUniformLocation(program, "uModelViewMatrix"),
-    },
-  };
-};
-
-export type Program = {
-  shader: WebGLShader;
-  attribLocations: {
-    vertexPosition: number;
-    vertexColor: number;
-  };
-  uniformLocations: {
-    projectionMatrix: WebGLUniformLocation;
-    modelViewMatrix: WebGLUniformLocation;
-  };
-};
-
 /**
  * @private
  * Initialize a shader program, so WebGL knows how to draw our data
  */
-const createProgram = (
+export const createProgram = (
   gl: WebGLRenderingContext,
   vsSource: string,
   fsSource: string
@@ -51,6 +18,7 @@ const createProgram = (
   // If creating the shader program failed, alert
   if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
     alert( "Unable to initialize the shader program: " + gl.getProgramInfoLog(program));
+    gl.deleteProgram(program)
     return null;
   }
 
@@ -61,7 +29,7 @@ const createProgram = (
  * @private
  * creates a shader of the given type, uploads the source and compiles it.
  */
-const loadShader = (
+export const loadShader = (
   gl: WebGLRenderingContext,
   type: number,
   source: string

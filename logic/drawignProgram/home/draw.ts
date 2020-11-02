@@ -1,5 +1,5 @@
-import { Program } from "./shader";
-import { Buffers } from "./buffer/buffer";
+import {Program } from './shader'
+import { Buffers } from "../../buffer/buffer";
 import { projectionMatrix } from "./projectionMatrix";
 import { modelViewMatrix } from "./modelViewMatrix";
 
@@ -8,8 +8,6 @@ export const drawScene = (
   program: Program,
   buffers: Buffers,
 ): void => {
-  gl.clearColor(0.0, 0.0, 0.0, 1.0); // Clear to black, fully opaque
-  gl.clearDepth(1.0); // Clear everything
   gl.enable(gl.DEPTH_TEST); // Enable depth testing
   gl.depthFunc(gl.LEQUAL); // Near things obscure far things
   gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
@@ -24,11 +22,6 @@ export const drawScene = (
   gl.useProgram(program.shader);
   gl.uniformMatrix4fv(program.uniformLocations.projectionMatrix, false, projectionMatrix);
   gl.uniformMatrix4fv(program.uniformLocations.modelViewMatrix, false, modelViewMatrix);
-  {
-    const offset = 0;
-    const vertexCount = 4;
-    gl.drawArrays(gl.TRIANGLE_STRIP, offset, vertexCount);
-  }
   {
     const vertexCount = 36;
     const type = gl.UNSIGNED_SHORT;
